@@ -1,2 +1,4 @@
-# DataStructuresAndProgramming2021
-Data Structures and Programming 2021/2022 Course at FMI Sofia University for CS
+# :books: Data Structures and Programming 2021/2022 Course at FMI Sofia University for CS
+
+## :pushpin: Content by weeks: 
+### :one: Sorting algorithms and file streams 
