@@ -251,7 +251,6 @@ A stable sorting algorithm leaves elements in the list that have equal sorting k
 - selection sort 
 - merge sort 
 - quick sort
-- radix sort
 
 и посочете техните сложности в средния и най-лошия случай. Определете дали те са in place и stable. За самото сортиране използвайте оператор `()`.
 
@@ -340,8 +339,6 @@ Explanation: n = 1 since there is 1 number, so all numbers are in the range [0,1
 - `0 <= nums[i] <= n`
 - All the numbers of `nums` are **unique**.
  
-
-**Follow up:** Можете ли да използвате само O(1) допълнителна памет и O(n) време?
 
 # Задача 4
 По даден символен низ `s`, сортирайте го на базата на честотата на срещане на всеки символ. Честотата на срещане на един символ е броят пъти, които той се среща в символния низ.
