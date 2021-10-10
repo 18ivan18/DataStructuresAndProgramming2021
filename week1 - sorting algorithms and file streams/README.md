@@ -2,31 +2,31 @@
 
 ## Какво беше това сложност?
 
-Θ(g(n)) = { f(n) | ∃c1, c2 > 0, ∃n0 : ∀n ≥ n0, 0 ≤ c1.g(n) ≤ f(n) ≤ c2.g(n) }
+Θ(g(n)) = { f(n) | ∃c<sub>1</sub>, c<sub>2</sub> > 0, ∃n<sub>0</sub> : ∀n ≥ n<sub>0</sub>, 0 ≤ c<sub>1</sub>.g(n) ≤ f(n) ≤ c<sub>2</sub>.g(n) }
 	
 f(n) ≈ g(n) ⇔ f(n) = Θ(g(n)) 
 
 ### Нестрога горна граница
 
-O(g(n)) = { f(n) | ∃c > 0, ∃n0 : ∀n ≥ n0, 0 ≤ f(n) ≤ c.g(n) }
+O(g(n)) = { f(n) | ∃c > 0, ∃n<sub>0</sub> : ∀n ≥ n<sub>0</sub>, 0 ≤ f(n) ≤ c.g(n) }
 
 f(n) <= g(n) ⇔ f(n) = O(g(n)) 
 	
 ### Нестрога долна граница
-Ω(g(n)) = { f(n) | ∃c > 0, ∃n0 : ∀n ≥ n0, 0 ≤ c.g(n) ≤ f(n) }
+Ω(g(n)) = { f(n) | ∃c > 0, ∃n<sub>0</sub> : ∀n ≥ n<sub>0</sub>, 0 ≤ c.g(n) ≤ f(n) }
 
 f(n) ≺ g(n) ⇔ f(n) = o(g(n)) 
 	
 
 ### Строга горна граница
 
-o(g(n)) = { f(n) | ∀c > 0, ∃n0 : ∀n ≥ n0, 0 ≤ f(n) < c.g(n) }
+o(g(n)) = { f(n) | ∀c > 0, ∃n<sub>0</sub> : ∀n ≥ n<sub>0</sub>, 0 ≤ f(n) < c.g(n) }
 
 f(n) >= g(n) ⇔ f(n) = Ω(g(n)) 
 	
 ### Строга долна граница
 
-ω(g(n)) = { f(n) | ∀c > 0, ∃n0 : ∀n ≥ n0, 0 ≤ c.g(n) < f(n) }
+ω(g(n)) = { f(n) | ∀c > 0, ∃n<sub>0</sub> : ∀n ≥ n<sub>0</sub>, 0 ≤ c.g(n) < f(n) }
 	
 f(n) ≻ g(n) ⇔ f(n) = ω(g(n)) 
 

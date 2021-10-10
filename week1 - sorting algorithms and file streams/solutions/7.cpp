@@ -95,12 +95,16 @@ int binarySearch(char **arr, int l, int r, char *x)
         // If the element is present at the middle
         // itself
         if (strcmp(arr[mid], x) == 0)
+        {
             return mid;
+        }
 
         // If element is smaller than mid, then
         // it can only be present in left subarray
         if (strcmp(arr[mid], x) > 0)
+        {
             return binarySearch(arr, l, mid - 1, x);
+        }
 
         // Else the element can only be present
         // in right subarray
@@ -110,39 +114,4 @@ int binarySearch(char **arr, int l, int r, char *x)
     // We reach here when element is not
     // present in array
     return -1;
-}
-
-function getPermutations(string, prefix = '')
-{
-    if (string.length <= 1)
-    {
-        return [prefix + string];
-    }
-
-    return Array.from(string).reduce((result, char, index) = >
-                                                             {
-                                                                 const reminder = string.slice(0, index) + string.slice(index + 1);
-                                                                 result = result.concat(getPermutations(reminder, prefix + char));
-                                                                 return result;
-                                                             },
-                                     []);
-}
-
-function powerset(n = '')
-{
-    const array = Array.from(n);
-    const base = [''];
-
-    const results = array.reduce((previous, element) = >
-                                                       {
-                                                           const previousPlusElement = previous.map(el = >
-                                                                                                         {
-                                                                                                             return `${el} $ { element }
-                                                                                                             `;
-                                                                                                         });
-                                                           return previous.concat(previousPlusElement);
-                                                       },
-                                 base);
-
-    return results;
 }
