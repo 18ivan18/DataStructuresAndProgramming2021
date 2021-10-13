@@ -31,5 +31,12 @@
 *.out
 *.app
 
-# output files
+# Output files
 *.output
+
+# Code coverage
+*.gcda
+*.gcno
+
+# VS Code 
+.vscode
