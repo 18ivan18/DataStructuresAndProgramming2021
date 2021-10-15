@@ -43,6 +43,14 @@ while (!st.empty()) {
 - Efficient algorithms
 
 # Задача 1
+## Reverse text without reversing individual words
+Имаме даден текст. Обрънете реда на думите в него.
+**Example 1:**
+```c++
+Input: s = "Technical Interview Preparation"
+Output: "Preparation Interview Technical"
+```
+# Задача 2
 ## Валидни скоби
 
 Даден е низ `s` съдържащ символите `'(', ')'`, `'{', '}'`, `'['` и `']'`, опредеете дали входът е валиден.
@@ -83,7 +91,7 @@ Output: true
 
 * 1 <= s.length <= 10<sup>4
 * `s` consists of parentheses only `'()[]{}'`.
-# Задача 2
+# Задача 3
 ## Минимален стек
 
 Напишете структура стек, която поддържа операциите `push`, `pop`, `top` и извеждане на минимален елемент в константно време.
@@ -115,7 +123,7 @@ minStack.getMin(); // return -2
 - Methods `pop`, `top` and `getMin` operations will always be - called on **non-empty** stacks.
 - At most 3 * 10<sup>4</sup> calls will be made to `push`, `pop`, `top`, and `getMin`.
 
-# Задача 3
+# Задача 4
 ## Пресметнете стойносттна на аритметичен израз записан в обратен полски запис (Reverse Polish Notation)
 
 ![](https://media.cheggcdn.com/media%2Fb3d%2Fb3d2eb31-5784-49be-895c-aef23651f0b2%2Fimage.png)
@@ -158,7 +166,7 @@ Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
 - 1 <= tokens.length <= 10<sup>4
 - `tokens[i]` is either an operator: `"+"`, `"-"`, `"*"`, or `"/"`, or an integer in the range `[-200, 200].`
 
-# Задача 4
+# Задача 5
 Нека пазим лог всеки път, когато сменяме директорията в нашата файлова система. 
 
 По-долу са описани следните операции:
@@ -207,7 +215,7 @@ Constraints:
 
 
 
-# Задача 5
+# Задача 6
 ## Простичък калкулатор
 Даден ни е низ `s` представляващ правилен алгебричен израз. Напишете обикновен калкулатор, който да пресметне стойността му и да я върне като резултат.
  
@@ -239,7 +247,7 @@ Output: 5
 - All the integers in the expression are non-negative integers in the range [0, 2<sup>31</sup> - 1].
 - The answer is **guaranteed** to fit in a **32-bit integer**.
 
-# Задача 6
+# Задача 7
 ## Калкулатор 
 Даден ни е низ `s` представляващ правилен алгебричен израз. Напишете калкулатор, който да пресметне стойността му и да я върне като резултат.
  
@@ -270,7 +278,7 @@ Output: 23
 - There will be no two consecutive operators in the input.
 - Every number and running calculation will fit in a signed 32-bit integer.
 
-# Задача 7
+# Задача 8
 ## Най-дълга поредица от правилни скоби
 Даден е низ състоящ се само от символите `'('` and `')'`, намерете дължината на най-дългия подниз от правилно поставени скоби.
 
@@ -298,7 +306,7 @@ Output: 0
 * 0 <= s.length <= 3 * 10<sup>4
 * `s[i]` is `'('`, or `')'`.
 
-# Задача 8
+# Задача 9
 ## Пресичащи се интервали
 Даден е вектор от интервали от време s. Всеки интервал се характеризира с начален час и краен час. Намерете всички непресичащи се интервали след като убедините всички пресичащи се.
 

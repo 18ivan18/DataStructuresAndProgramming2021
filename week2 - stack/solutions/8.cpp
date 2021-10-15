@@ -1,58 +1,89 @@
-#include <iostream>
-#include <vector>
+#include <string>
 #include <stack>
-#include <algorithm>
+#include <cassert>
+#include <iostream>
 
-// Data structure to represent an interval
-struct Interval
+// Time: O(n)
+// Space: O(n)
+int longestValidParentheses(std::string s)
 {
-    int begin, end;
-
-    bool operator<(Interval const &i)
+    std::stack<int> st;
+    st.push(-1);
+    int longest = 0, current = 0, size = s.length();
+    for (int i = 0; i < size; i++)
     {
-        return (begin < i.begin);
-    }
-};
-
-// Function to merge overlapping intervals
-void mergeIntervals(std::vector<Interval> intervals) // no-ref, no-const
-{
-    // sort the intervals in increasing order of their starting time
-    sort(intervals.begin(), intervals.end());
-
-    // create an empty stack
-    std::stack<Interval> st;
-
-    // do for each interval
-    for (const Interval &curr : intervals)
-    {
-        // if the stack is empty or the top interval in the stack does not overlap
-        // with the current interval, push it into the stack
-        if (st.empty() || curr.begin > st.top().end)
+        if (s[i] == '(')
         {
-            st.push(curr);
+            st.push(i);
         }
-
-        // if the top interval of the stack overlaps with the current interval,
-        // merge two intervals by updating the end of the top interval
-        // to the current interval
-        if (st.top().end < curr.end)
+        if (s[i] == ')')
         {
-            st.top().end = curr.end;
+            st.pop();
+            if (st.empty())
+            {
+                st.push(i);
+            }
+            current = i - st.top();
+            longest = std::max(longest, current);
         }
     }
+    return longest;
+}
 
-    // print all non-overlapping intervals
-    while (!st.empty())
+// Time: O(n)
+// Space: O(1)
+int longestValidParenthesesLeftToRight(std::string s)
+{
+    int left = 0, right = 0, longest = 0, size = s.length();
+    for (int i = 0; i < size; i++)
     {
-        std::cout << '{' << st.top().begin << ", " << st.top().end << "}\n";
-        st.pop();
+
+        if (s.at(i) == '(')
+        {
+            left++;
+        }
+        else
+        {
+            right++;
+        }
+        if (left == right)
+        {
+            longest = std::max(longest, left + right);
+        }
+        if (right > left)
+        {
+            left = right = 0;
+        }
     }
+    left = right = 0;
+    for (int i = size - 1; i >= 0; i--)
+    {
+
+        if (s.at(i) == '(')
+        {
+            left++;
+        }
+        else
+        {
+            right++;
+        }
+        if (left == right)
+        {
+            longest = std::max(longest, left + right);
+        }
+        if (left > right)
+        {
+            left = right = 0;
+        }
+    }
+
+    return longest;
 }
 
 int main()
 {
-    std::vector<Interval> intervals = {{1, 5}, {2, 3}, {4, 6}, {7, 8}, {8, 10}, {12, 15}};
-
-    mergeIntervals(intervals);
+    assert(longestValidParentheses("(()") == 2);
+    assert(longestValidParentheses(")()())") == 4);
+    assert(longestValidParentheses("") == 0);
+    assert(longestValidParentheses("()(()") == 2);
 }

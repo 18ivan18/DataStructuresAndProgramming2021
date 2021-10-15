@@ -1,22 +1,48 @@
-#include <vector>
-#include <stack>
 #include <string>
+#include <stack>
+#include <vector>
+#include <iostream>
+#include <cassert>
 
-int minOperations(std::vector<std::string> &logs)
+int evalRPN(const std::vector<std::string> &tokens)
 {
-    std::stack<std::string> st;
-    for (int i = 0; i < logs.size(); i++)
+    std::stack<int> stk;
+
+    for (int i = 0; i < tokens.size(); i++)
     {
-        if (logs[i] == "./" || (logs[i] == "../" && st.empty()))
+        if (tokens[i] != "+" && tokens[i] != "-" && tokens[i] != "*" && tokens[i] != "/")
         {
+            stk.push(stoi(tokens[i]));
             continue;
         }
-        if (logs[i] == "../")
+        int num1 = stk.top();
+        stk.pop();
+        int num2 = stk.top();
+        stk.pop();
+        if (tokens[i] == "+")
         {
-            st.pop();
-            continue;
+            stk.push(num1 + num2);
         }
-        st.push(logs[i]);
+        else if (tokens[i] == "-")
+        {
+            stk.push(num2 - num1);
+        }
+        else if (tokens[i] == "*")
+        {
+            stk.push(num1 * num2);
+        }
+        else
+        {
+            stk.push(num2 / num1);
+        }
     }
-    return st.size();
+
+    return stk.top();
+}
+
+int main()
+{
+    assert(evalRPN({"2", "1", "+", "3", "*"}) == 9);
+    assert(evalRPN({"4", "13", "5", "/", "+"}) == 6);
+    assert(evalRPN({"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}) == 22);
 }

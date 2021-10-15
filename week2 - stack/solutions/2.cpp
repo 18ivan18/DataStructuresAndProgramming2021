@@ -1,49 +1,78 @@
+#include <string>
 #include <stack>
-class MinStack
+#include <cassert>
+#include <iostream>
+
+bool isValid(std::string s)
 {
-public:
-    // we can use only 1 stack <pair<int, int>>
-    std::stack<int> st, minSt;
-
-    MinStack()
+    std::stack<char> stackOfParentheses;
+    for (auto &&i : s)
     {
-    }
-
-    void push(int val)
-    {
-        st.push(val);
-        if (minSt.empty())
+        switch (i)
         {
-            minSt.push(val);
-        }
-        else
+        case '{':
+        case '(':
+        case '[':
+            stackOfParentheses.push(i);
+            break;
+        case '}':
         {
-            minSt.push(std::min(val, minSt.top()));
+            if (!stackOfParentheses.size())
+            {
+                return false;
+            }
+            char p = stackOfParentheses.top();
+            stackOfParentheses.pop();
+            if (p != '{')
+            {
+                return false;
+            }
+            break;
+        }
+        case ')':
+        {
+            if (!stackOfParentheses.size())
+            {
+                return false;
+            }
+            char p = stackOfParentheses.top();
+            stackOfParentheses.pop();
+            if (p != '(')
+            {
+                return false;
+            }
+            break;
+        }
+        case ']':
+        {
+            if (!stackOfParentheses.size())
+            {
+                return false;
+            }
+            char p = stackOfParentheses.top();
+            stackOfParentheses.pop();
+            if (p != '[')
+            {
+                return false;
+            }
+            break;
+        }
+
+        default:
+            return false;
         }
     }
+    return !stackOfParentheses.size();
+}
 
-    void pop()
-    {
-        st.pop();
-        minSt.pop();
-    }
-
-    int top()
-    {
-        return st.top();
-    }
-
-    int getMin()
-    {
-        return minSt.top();
-    }
-};
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack* obj = new MinStack();
- * obj->push(val);
- * obj->pop();
- * int param_3 = obj->top();
- * int param_4 = obj->getMin();
- */
+int main()
+{
+    assert(isValid("()"));
+    assert(!isValid("["));
+    assert(!isValid("]"));
+    assert(!isValid("()(()"));
+    assert(isValid("()[]{}"));
+    assert(!isValid("(]"));
+    assert(!isValid("([)]"));
+    assert(isValid("{[]}"));
+}

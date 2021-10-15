@@ -1,89 +1,52 @@
 #include <string>
 #include <stack>
 #include <cassert>
-#include <iostream>
 
-// Time: O(n)
-// Space: O(n)
-int longestValidParentheses(std::string s)
+int calculate(std::string s)
 {
-    std::stack<int> st;
-    st.push(-1);
-    int longest = 0, current = 0, size = s.length();
-    for (int i = 0; i < size; i++)
+    std::stack<int> sum, op;
+    char c;
+    int number = 0, sign = 1, currSum = 0;
+
+    for (int i = 0; i < s.size(); i++)
     {
-        if (s[i] == '(')
+        c = s[i];
+        if (c == '(')
         {
-            st.push(i);
+            sum.push(currSum);
+            op.push(sign);
+            currSum = 0;
+            sign = 1;
         }
-        if (s[i] == ')')
+        if (c == ')')
         {
-            st.pop();
-            if (st.empty())
+            currSum = currSum * op.top() + sum.top();
+            sum.pop();
+            op.pop();
+        }
+        if (isdigit(c))
+        {
+            number = 0;
+            while (i < s.size() && isdigit(s[i]))
             {
-                st.push(i);
+                number = number * 10 + (s[i] - '0');
+                i++;
             }
-            current = i - st.top();
-            longest = std::max(longest, current);
+            i--;
+            currSum += number * sign;
+            sign = 1;
+        }
+        if (c == '-')
+        {
+            sign *= -1;
         }
     }
-    return longest;
-}
-
-// Time: O(n)
-// Space: O(1)
-int longestValidParenthesesLeftToRight(std::string s)
-{
-    int left = 0, right = 0, longest = 0, size = s.length();
-    for (int i = 0; i < size; i++)
-    {
-
-        if (s.at(i) == '(')
-        {
-            left++;
-        }
-        else
-        {
-            right++;
-        }
-        if (left == right)
-        {
-            longest = std::max(longest, left + right);
-        }
-        if (right > left)
-        {
-            left = right = 0;
-        }
-    }
-    left = right = 0;
-    for (int i = size - 1; i >= 0; i--)
-    {
-
-        if (s.at(i) == '(')
-        {
-            left++;
-        }
-        else
-        {
-            right++;
-        }
-        if (left == right)
-        {
-            longest = std::max(longest, left + right);
-        }
-        if (left > right)
-        {
-            left = right = 0;
-        }
-    }
-
-    return longest;
+    return currSum;
 }
 
 int main()
 {
-    assert(longestValidParentheses("(()") == 2);
-    assert(longestValidParentheses(")()())") == 4);
-    assert(longestValidParentheses("") == 0);
-    assert(longestValidParentheses("()(()") == 2);
+    assert(calculate("1 + 1") == 2);
+    assert(calculate(" 2-1 + 2 ") == 3);
+    assert(calculate("(1+(4+5+2)-3)+(6+8)") == 23);
 }

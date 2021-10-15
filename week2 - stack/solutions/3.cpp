@@ -1,48 +1,49 @@
-#include <string>
 #include <stack>
-#include <vector>
-#include <iostream>
-#include <cassert>
-
-int evalRPN(const std::vector<std::string> &tokens)
+class MinStack
 {
-    std::stack<int> stk;
+public:
+    // we can use only 1 stack <pair<int, int>>
+    std::stack<int> st, minSt;
 
-    for (int i = 0; i < tokens.size(); i++)
+    MinStack()
     {
-        if (tokens[i] != "+" && tokens[i] != "-" && tokens[i] != "*" && tokens[i] != "/")
+    }
+
+    void push(int val)
+    {
+        st.push(val);
+        if (minSt.empty())
         {
-            stk.push(stoi(tokens[i]));
-            continue;
-        }
-        int num1 = stk.top();
-        stk.pop();
-        int num2 = stk.top();
-        stk.pop();
-        if (tokens[i] == "+")
-        {
-            stk.push(num1 + num2);
-        }
-        else if (tokens[i] == "-")
-        {
-            stk.push(num2 - num1);
-        }
-        else if (tokens[i] == "*")
-        {
-            stk.push(num1 * num2);
+            minSt.push(val);
         }
         else
         {
-            stk.push(num2 / num1);
+            minSt.push(std::min(val, minSt.top()));
         }
     }
 
-    return stk.top();
-}
+    void pop()
+    {
+        st.pop();
+        minSt.pop();
+    }
 
-int main()
-{
-    assert(evalRPN({"2", "1", "+", "3", "*"}) == 9);
-    assert(evalRPN({"4", "13", "5", "/", "+"}) == 6);
-    assert(evalRPN({"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}) == 22);
-}
+    int top()
+    {
+        return st.top();
+    }
+
+    int getMin()
+    {
+        return minSt.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
