@@ -45,15 +45,15 @@ O(n!) | Factorial | **Find all permutations of a given set/string**
 
 ## Защо ме вълнува сложнстта?
 
-n | O(1) | O(log n) | O(n) | O(n log n) | O($n^2$) | O($2^n$) | O(n!)
-- | - | - | - | - | - | - | - 
-1	        | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| < 1 sec	            | < 1 sec
-10	        | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| < 1 sec	            | 4 sec
-100	        | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| 40170 trillion years	| > vigintillion years
-1,000	    | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| > vigintillion years	| > centillion years
-10,000	    | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| 2 min	    | > centillion years	| > centillion years
-100,000	    | < 1 sec |	< 1 sec |	< 1 sec	| 1 sec	    | 3 hours	| > centillion years	| > centillion years
-1,000,000	| < 1 sec |	< 1 sec |	1 sec	| 20 sec	| 12 days	| > centillion years	| > centillion years
+| n | O(1) | O(log n) | O(n) | O(n log n) | O($n^2$) | O($2^n$) | O(n!)
+| - | - | - | - | - | - | - | - 
+| 1	        | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| < 1 sec	            | < 1 sec
+| 10	        | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| < 1 sec	            | 4 sec
+| 100	        | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| 40170 trillion years	| > vigintillion years
+| 1,000	    | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| < 1 sec	| > vigintillion years	| > centillion years
+| 10,000	    | < 1 sec |	< 1 sec |	< 1 sec	| < 1 sec	| 2 min	    | > centillion years	| > centillion years
+| 100,000	    | < 1 sec |	< 1 sec |	< 1 sec	| 1 sec	    | 3 hours	| > centillion years	| > centillion years
+| 1,000,000	| < 1 sec |	< 1 sec |	1 sec	| 20 sec	| 12 days	| > centillion years	| > centillion years
 
 ## Какво беше това потоци?
 
@@ -79,14 +79,14 @@ void open(const char *filename, ios::openmode mode);
 
 ### Кои бяха тези флагове за отваряне на файлове?
 
-№ | Mode Flag & Description
-- | -
-1 |	ios::app <br>Append mode. All output to that file to be appended to the end.
-2 |	ios::ate<br>Open a file for output and move the read/write control to the end of the file.
-3 |	ios::in<br>Open a file for reading.
-4 |	ios::out<br>Open a file for writing.
-5 |	ios::trunc<br>If the file already exists, its contents will be truncated before opening the file.
-6 | ios::binary<br> This causes the file to be accessed as a binary file.   
+| № | Mode Flag & Description
+| - | -
+| 1 |	ios::app <br>Append mode. All output to that file to be appended to the end.
+| 2 |	ios::ate<br>Open a file for output and move the read/write control to the end of the file.
+| 3 |	ios::in<br>Open a file for reading.
+| 4 |	ios::out<br>Open a file for writing.
+| 5 |	ios::trunc<br>If the file already exists, its contents will be truncated before opening the file.
+| 6 | ios::binary<br> This causes the file to be accessed as a binary file.   
 
 Всеки поток трябва да се затвори след като приключи неговото използване. Използваме следния метод:
 
@@ -280,6 +280,21 @@ Selection Sort</b></summary>
 https://i2.wp.com/algorithms.tutorialhorizon.com/files/2019/01/Selection-Sort-Gif.gif?ssl=1)
 </p>
 </details>
+
+<details><summary><b>
+Анализ</b></summary>
+<p>
+
+| \* | Merge sort | Quick sort | Counting sort | Bubble sort | Selection sort | Insertion sort |
+| --- | --- | --- | --- | --- | --- | --- |
+| BC | *O(nlogn)* | *O(nlogn)* | *O(n + k)* | *O(n)* | *O($n^2$)* | *O(n)* |
+| AC | *O(nlogn)* | *O(nlogn)* | *O(n + k)* | *O($n^2$)* | *O($n^2$)* | *O($n^2$)* |
+| WC | *O(nlogn)* | *O($n^2$)* | *O(n + k)* |*O($n^2$)*  | *O($n^2$)* | *O($n^2$)* |
+| Memory | *O(n)* | *O(1)* | *O(n + k)* | *O(1)* | *O(1)* | *O(1)* |
+| Stability | :heavy_check_mark: | ❌ | ❌ | :heavy_check_mark: | ❌ | :heavy_check_mark: |
+</p>
+</details>
+ 
 
 # Задача 2
 По дадени два символни низа `s` и `t`, върнете `true` ако `t` е анаграма на `s`, и `false` в противен случай.
