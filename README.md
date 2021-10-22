@@ -6,3 +6,4 @@
 ## :pushpin: Content by weeks: 
 ### :one: Sorting algorithms and file streams 
 ### :two: Stack
+### 3️⃣ Queue
