@@ -191,6 +191,7 @@ Explanation: The friends leave in this order: 5, 4, 6, 2, 3. The winner is frien
 Даден е масив от цели числа и sliding window с големина `k`, който се движи от първия елемент до последния. В него можете да виждате само по `k` числа. Придвижва се на дясно с по една позиция.
 
 Какво е sliding window?
+
 ![](https://i.stack.imgur.com/2Dneo.png)
 
 Принтирайте максимума на елементите в sliding window-а на всяка итерация.
@@ -292,5 +293,3 @@ Output: Minimum number of steps required is 6
 Explanation: 
 
 ![](https://www.techiedelight.com/wp-content/uploads/2016/11/Chess-Board.png)
-# Задача 9
-## Flood Fill Algorithm
