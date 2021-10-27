@@ -63,3 +63,66 @@ ListNode *reverseListRec(ListNode *head)
     head->next = nullptr;
     return temp;
 }
+
+// Recursive function to reverse a given linked list. It reverses the
+// given linked list by fixing the head pointer and then `.next`
+// pointers of every node in reverse order
+void recursiveReverse(struct ListNode *head, struct ListNode **headRef)
+{
+    struct ListNode *first;
+    struct ListNode *rest;
+
+    // empty list base case
+    if (head == NULL)
+    {
+        return;
+    }
+
+    first = head;       // suppose first = {1, 2, 3}
+    rest = first->next; // rest = {2, 3}
+
+    // base case: the list has only one node
+    if (rest == NULL)
+    {
+        // fix the head pointer here
+        *headRef = first;
+        return;
+    }
+
+    // recursively reverse the smaller {2, 3} case
+    // after: rest = {3, 2}
+    recursiveReverse(rest, headRef);
+
+    // put the first item at the end of the list
+    rest->next = first;
+    first->next = NULL; // (tricky step — make a drawing)
+}
+
+// Reverse a given linked list. The function takes a pointer
+// (reference) to the head pointer
+void reverse(struct ListNode **head)
+{
+    recursiveReverse(*head, head);
+}
+
+void reverse(struct ListNode **head)
+{
+    struct ListNode *previous = NULL; // the previous pointer
+    struct ListNode *current = *head; // the main pointer
+
+    // traverse the list
+    while (current != NULL)
+    {
+        // tricky: note the next node
+        struct ListNode *next = current->next;
+
+        current->next = previous; // fix the current node
+
+        // advance the two pointers
+        previous = current;
+        current = next;
+    }
+
+    // fix the head pointer to point to the new front
+    *head = previous;
+}

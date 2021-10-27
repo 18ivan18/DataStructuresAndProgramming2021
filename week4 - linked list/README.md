@@ -283,7 +283,6 @@ Output: [1]
 Преобразувайте даден свързан списък от свързани списъци до сортиран свързан списък. 
 **Example 1:**
 
-
 ![](https://www.techiedelight.com/wp-content/uploads/Flatten-linked-list.png)
 ```c++
 Input: head = [[1, 4, 6, 8], [2, 3, 7], [5, 9], [10, 11, 12]]
