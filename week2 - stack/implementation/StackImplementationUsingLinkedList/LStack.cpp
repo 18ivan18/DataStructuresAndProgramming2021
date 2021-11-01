@@ -22,7 +22,10 @@ void LStack<T>::copy(const LStack& other)
 template<typename T>
 void LStack<T>::erase()
 {
-	delete topPtr;
+	while (!empty())
+	{
+		pop();
+	}
 }
 
 template<typename T>
