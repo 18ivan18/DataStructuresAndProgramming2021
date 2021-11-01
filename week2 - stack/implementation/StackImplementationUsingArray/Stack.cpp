@@ -22,6 +22,7 @@ void Stack<T>::push(T const& element)
 	if (full())
 	{
 		std::cerr << "The stack is full, you cannot push an element!" << std::endl;
+		return;
 	}
 	arr[++topIndex] = element;
 }

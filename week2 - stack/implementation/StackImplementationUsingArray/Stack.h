@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-const int MAX_STACK_SIZE = 128; // 2^7
+const int MAX_STACK_SIZE = 128; // 1 << 7
 
 template <typename T>
 class Stack

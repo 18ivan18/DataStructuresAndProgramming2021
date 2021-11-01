@@ -7,7 +7,7 @@ void LStack<T>::copy(const LStack& other)
 	topPtr = nullptr; 
 
 	StackElement<T>* tempPtr = other.topPtr;
-	LStack<t> tempStack;
+	LStack<T> tempStack;
 	while (tempPtr != nullptr)
 	{
 		tempStack.push(tempPtr->data);
