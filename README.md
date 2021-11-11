@@ -7,3 +7,5 @@
 ### :one: Sorting algorithms and file streams 
 ### :two: Stack
 ### 3️⃣ Queue
+### 4️⃣ Singly Linked List
+### 5️⃣ Doubly Linked List and other variants
