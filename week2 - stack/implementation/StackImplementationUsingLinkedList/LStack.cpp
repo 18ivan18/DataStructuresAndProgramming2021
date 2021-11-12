@@ -85,9 +85,7 @@ bool LStack<T>::empty()
 template<typename T>
 void LStack<T>::push(const T& element)
 {
-	StackElement<T>* newElement = new StackElement<T>;
-	newElement->data = element;
-	newElement->next = topPtr;
+	StackElement<T>* newElement = new StackElement<T>{ element,topPtr };
 	topPtr = newElement;
 }
 
