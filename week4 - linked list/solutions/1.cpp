@@ -100,3 +100,18 @@ void reverse(ListNode *&head)
     // fix the head pointer to point to the new front
     head = previous;
 }
+
+// use this one
+// the best
+ListNode *reverseIterative(ListNode *head)
+{
+    ListNode *curr = head, *prev = nullptr, *next;
+    while (curr)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
