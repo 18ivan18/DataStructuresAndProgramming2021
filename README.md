@@ -5,3 +5,6 @@
 ### :two: Stack
 ### :three: Queue
 ### :four: Linked list
+### :five:
+### :six:
+### :seven: Trees
