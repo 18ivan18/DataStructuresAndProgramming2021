@@ -1,5 +1,14 @@
 # FAQ
 
+## Какво е дърво?
+Рекурсивна структура от данни, състояща се от 
+
+## Как обхождам дърво?
+ЛДК (ляво дясно корен) - postorder
+
+КЛД (корен ляво дясно) - preorder
+
+ЛКД (ляво корен дясно) - inorder
 # Задача 1
 Given the `root` of a binary tree, return the inorder traversal of its nodes' values.
 
