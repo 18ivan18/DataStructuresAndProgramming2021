@@ -26,3 +26,17 @@ Output: 3
 - The number of nodes in the tree is n.
 - 1 <= k <= n <= 104
 - 0 <= Node.val <= 104
+
+BST: 
+- constructor: given a sorted array
+- put
+- get
+- contains
+- remove
+- height
+- serialize
+- reduce
+- floor
+- isBST
+- min
+- kth smallest
