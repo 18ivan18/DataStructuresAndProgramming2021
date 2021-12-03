@@ -1,9 +1,10 @@
 # FAQ
 
 # Задача 1
-Given the `root` of a binary tree, return the inorder traversal of its nodes' values.
+По даден корен на двоично дърво, върнете неговото inorder обхождане. 
 
 **Example 1:**
+
 ![](https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg)
 ```c++
 Input: root = [1,null,2,3]
@@ -40,16 +41,16 @@ Output: [1,2]
 - -100 <= Node.val <= 100
  
 
-**Follow up:** Recursive solution is trivial, could you do it iteratively?
+**Follow up:** Рекурсивното решение е тривиално, можете ли да го решите итеративно?
 
-What about the preorder traversal of its nodes' values? Postorder?
+Намерете и preorder и postorder обхожданията.
 
-What about n-ary tree?
+Ами ако дървото е n-арно?
 
 # Задача 2
-Given the root of a binary tree, return all root-to-leaf paths in any order.
+По даден корен на двоично дърво, върнете всички пътища от корен-до-листо в произволен ред.
 
-A leaf is a node with no children.
+Листо в дървото е връх без деца.
 
 **Example 1:**
 
@@ -66,12 +67,11 @@ Output: ["1"]
 
 # Задача 3
 ## Binary Tree Level Order Traversal
+По даден корен на двоично дърво върнете обхождането на това дърво по нива. Например, ниво по ниво от ляво на дясно.
 
-Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
-
- 
 
 **Example 1:**
+
 ![](https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg)
 ```c++
 Input: root = [3,9,20,null,null,15,7]
@@ -92,7 +92,7 @@ Output: []
 # Задача 4
 ## Binary Tree Zigzag Level Order Traversal
 
-Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
+По даден корен на двоично дърво върнете обхождането на това дърво по нива, но този път на зиг-заг. Например, първото ниво от ляво на дясно, второто от дясно на ляво и тн.
 
 **Example 1:**
 
@@ -116,7 +116,7 @@ Output: []
 # Задача 5
 ## Binary Tree Right Side View
 
-Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+По даден корен на двоично дърво си представете, че стоите от дясната му страна и върнете стойностите на върховете, които можете да видите в последователност отгоре надолу.
 
 **Example 1:**
 
