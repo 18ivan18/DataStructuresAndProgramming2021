@@ -38,6 +38,7 @@ int kthSmallestStack(TreeNode *root, int k)
 {
     std::stack<TreeNode *> stack;
 
+    // O(n)
     while (true)
     {
         while (root)
