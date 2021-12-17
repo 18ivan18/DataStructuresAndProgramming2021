@@ -1,6 +1,7 @@
 #include "BST.h"
 #include <cassert>
 #include <iomanip>
+#include <queue>
 
 #include "./utils.cpp"
 
@@ -290,3 +291,74 @@ void BST<Key, Value>::printHelper(Node *node, int spaces)
 //     }
 //     return size(x->left);
 // }
+
+template <typename Key, typename Value>
+class BST<Key, Value>::iterator
+{
+    std::queue<BST<Key, Value>::Node *> v;
+
+public:
+    iterator(BST<Key, Value>::Node *root)
+    {
+        inOrder(root);
+    }
+
+    void inOrder(BST<Key, Value>::Node *root)
+    {
+        if (!root)
+        {
+            return;
+        }
+        inOrder(root->left);
+        v.push(root);
+        inOrder(root->right);
+    }
+
+    iterator &operator++()
+    {
+        v.pop();
+        return *this;
+    }
+
+    iterator operator++(int)
+    {
+        iterator save = *this;
+        ++(*this);
+        return save;
+    }
+
+    std::pair<Key, Value> operator*()
+    {
+        return std::make_pair(v.front()->key, v.front()->value);
+    }
+
+    bool operator!=(const iterator &rhs)
+    {
+        if (v.empty() && rhs.v.empty())
+        {
+            return false;
+        }
+        if (v.empty() || rhs.v.empty())
+        {
+            return true;
+        }
+        return v.front() != rhs.v.front();
+    }
+
+    bool hasNext()
+    {
+        return !v.empty();
+    }
+};
+
+template <typename Key, typename Value>
+typename BST<Key, Value>::iterator BST<Key, Value>::begin()
+{
+    return iterator(root);
+}
+
+template <typename Key, typename Value>
+typename BST<Key, Value>::iterator BST<Key, Value>::end()
+{
+    return iterator(nullptr);
+}

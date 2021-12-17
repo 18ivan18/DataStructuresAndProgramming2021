@@ -29,6 +29,8 @@ private:
     void printHelper(Node *node, int spaces = 0);
 
 public:
+    class iterator;
+
     BST();
     // sorted array!
     BST(const std::vector<std::pair<Key, Value>> &);
@@ -65,6 +67,10 @@ public:
     // ductive proof that it computes the desired result.
     // Interchanging right and left (and less and greater)
     // gives ceiling().
+
+    // iterator
+    iterator begin();
+    iterator end();
 };
 
 #endif

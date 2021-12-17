@@ -37,5 +37,15 @@ int main()
     std::vector<std::pair<int, std::string>> v = {{5, "Burgas"}, {10, "Plovdiv"}, {15, "Silistra"}, {20, "Pleven"}, {25, "Stara Zagora"}};
     BST<int, std::string> *bst = new BST<int, std::string>(v);
     bst->prittyPrint();
+    for (auto it = bst->begin(); it != bst->end(); it++)
+    {
+        std::cout << (*it).first << " " << (*it).second << "\n";
+    }
+
+    for (auto &&i : *bst)
+    {
+        std::cout << i.first << " " << i.second << "\n";
+    }
+
     delete bst;
 }
