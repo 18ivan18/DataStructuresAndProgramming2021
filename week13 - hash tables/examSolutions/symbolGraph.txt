@@ -1,0 +1,16 @@
+5
+abc
+abx
+xyz
+abcd
+abxd
+8
+abc abx
+abc xyz
+abc abcd
+abx abcd
+abx xyz
+xyz abcd
+abcd abxd
+abx abxd
+abc abxd 
