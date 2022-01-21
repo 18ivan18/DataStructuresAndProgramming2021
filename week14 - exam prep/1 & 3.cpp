@@ -5,11 +5,9 @@
 #include <stack>
 #include <algorithm>
 
-// приемам че..., защото h1
 struct HTMLNode
 {
-    std::string tag;
-    std::string text;
+    std::string tag, text;
     std::vector<HTMLNode *> children;
 };
 
@@ -17,7 +15,6 @@ HTMLNode *buildTree(std::ifstream &is, std::stack<std::string> &s)
 {
     std::string input, content;
     std::getline(is, input, '>');
-    std::cout << input << '\n';
     if (input.size() != 0 && input[0] == '/')
     {
         return nullptr;
@@ -29,17 +26,13 @@ HTMLNode *buildTree(std::ifstream &is, std::stack<std::string> &s)
     if (content.length() == 0 || !isspace(content[0]))
     {
         root->text = content;
-        std::getline(is, input, '>');
         // std::cout << content << '\n';
     }
-    else
+    HTMLNode *child = buildTree(is, s);
+    while (child != nullptr)
     {
-        HTMLNode *child = buildTree(is, s);
-        while (child != nullptr)
-        {
-            root->children.push_back(child);
-            child = buildTree(is, s);
-        }
+        root->children.push_back(child);
+        child = buildTree(is, s);
     }
     is.ignore(100, '<');
     return root;
@@ -113,7 +106,7 @@ void formatTree(HTMLNode *root, int level)
     }
     else
     {
-        std::cout << '<' << root->tag << ">\n";
+        std::cout << '<' << root->tag << ">" << root->text << '\n';
         for (auto &&i : root->children)
         {
             formatTree(i, level + 1);
@@ -131,7 +124,6 @@ void formatTree(HTMLNode *root, int level)
 
 int main()
 {
-    // assert(checkHTMLFile("index.html") == 'correct');
     try
     {
         checkHTMLFile("index.html");
