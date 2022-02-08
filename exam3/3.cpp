@@ -59,7 +59,12 @@ void runProgram(const std::string &instructions, TreeNode *root)
         }
         if (instruction[0] == '(' && instruction.back() == ')')
         {
-            root = root->children[std::stoi(instruction.substr(1, instruction.size() - 2)) - 1];
+            int idx = std::stoi(instruction.substr(1, instruction.size() - 2)) - 1;
+            if (idx >= root->children.size())
+            {
+                throw "Invalid index out of bounds.";
+            }
+            root = root->children[idx];
         }
         if (instruction[0] = 'e' && instruction[1] == '(' && instruction.back() == ')')
         {

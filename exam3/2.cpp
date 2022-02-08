@@ -7,6 +7,7 @@ struct BinTreeNode
 
 #include <string>
 #include <unordered_set>
+// all this should probably be in a class
 struct ArithmeticBinTree : public BinTreeNode<std::string>
 {
     ArithmeticBinTree *left, *right;

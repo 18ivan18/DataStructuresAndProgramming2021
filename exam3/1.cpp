@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <list>
+#include <queue>
 #include <algorithm>
 #include <numeric>
 
@@ -25,25 +25,19 @@ struct Cloth
     }
 };
 
-using Shelf = std::vector<std::list<Cloth>>;
+using Shelf = std::vector<std::deque<Cloth>>;
 
-void printShelf(Shelf &s)
+void printShelf(Shelf s)
 {
     std::vector<std::size_t> sizes;
     std::transform(s.begin(), s.end(), std::back_inserter(sizes),
-                   [](const std::list<Cloth> &c) -> std::size_t
+                   [](const std::deque<Cloth> &c) -> std::size_t
                    { return c.size(); });
 
     size_t max = std::accumulate(sizes.begin(), sizes.end(),
                                  0,
                                  [](size_t result, size_t curr)
                                  { return std::max(result, curr); });
-
-    std::vector<std::list<Cloth>::iterator> shelves;
-    std::transform(s.begin(), s.end(),
-                   std::back_inserter(shelves),
-                   [](std::list<Cloth> &c)
-                   { return c.begin(); });
 
     // std::cout << max << "\n";
     for (int i = max - 1; i >= 0; i--)
@@ -52,8 +46,8 @@ void printShelf(Shelf &s)
         {
             if (i < s[j].size())
             {
-                std::cout << *shelves[j] << " ";
-                shelves[j]++;
+                std::cout << s[j].front() << " ";
+                s[j].pop_front();
             }
             else
             {
@@ -74,13 +68,24 @@ struct ColorHash
     }
 };
 
+Color getAvailableColor(Color c, const std::unordered_set<Color> &acceptableColors)
+{
+    for (auto &&color : acceptableColors)
+    {
+        if (color != c)
+        {
+            return color;
+        }
+    }
+    throw "No color available.";
+}
+
 void validate(Shelf &s, std::vector<std::unordered_set<Color>> &acceptableColorsByPiles, std::vector<std::pair<int, int>> minMaxPrices)
 {
-    std::list<Cloth>::iterator curr, next;
     int price;
     for (int i = 0; i < s.size(); i++)
     {
-        auto &shelf = s[i];
+        std::deque<Cloth> shelf = s[i], newShelf;
         if (i < s.size() - 1)
         {
             auto nextShelf = s[i + 1];
@@ -89,34 +94,31 @@ void validate(Shelf &s, std::vector<std::unordered_set<Color>> &acceptableColors
                 shelf.pop_back();
             }
         }
-        curr = shelf.begin();
-        next = ++shelf.begin();
         price = 0;
-        while (curr != shelf.end())
+        while (!shelf.empty())
         {
-            if (next != shelf.end() && ((*curr).color == (*next).color || acceptableColorsByPiles[i].count((*curr).color) == 0))
+            auto item = shelf.front();
+            shelf.pop_front();
+            if (!shelf.empty() && (item.color == shelf.front().color || !acceptableColorsByPiles[i].count(item.color)))
             {
-                shelf.erase(curr);
-                curr = next;
-                next++;
+                continue;
             }
-            else
-            {
-                price += (*curr).price;
-                curr++;
-                next++;
-            }
+
+            newShelf.push_back(item);
+            price += item.price;
         }
         auto [min, max] = minMaxPrices[i];
         if (price < min)
         {
-            // add
-            std::cout << "Price underflow\n";
+            Color c = getAvailableColor(newShelf.front().color, acceptableColorsByPiles[i]);
+            newShelf.push_front({min - price, c});
         }
+        s[i] = newShelf;
+        // I don't like this approach for dealing with the price overflow, we do it this way so when we remove the last item we don't introduce new problems with the colros of the bottom cloth of the stacks
         if (price > max)
         {
-            // remove
-            std::cout << "Price overflow\n";
+            s[i].pop_back();
+            i--;
         }
     }
 }
@@ -126,8 +128,6 @@ int main()
     Shelf s = {{{10, Color::YELLOW}, {6, Color::RED}, {4, Color::YELLOW}, {15, Color::YELLOW}, {3, Color::RED}, {1, Color::GREEN}, {17, Color::YELLOW}, {20, Color::RED}},
                {{3, Color::BLUE}, {5, Color::RED}, {10, Color::YELLOW}, {25, Color::BLUE}}};
     printShelf(s);
-    // std::vector<std::vector<Color>> acceptableColorsByPilesVector = {{Color::YELLOW, Color::RED, Color::GREEN},
-    //                                                                  {Color::YELLOW, Color::RED, Color::BLUE}};
     std::vector<std::unordered_set<Color>> acceptableColorsByPiles(s.size());
     acceptableColorsByPiles[0].insert(Color::YELLOW);
     acceptableColorsByPiles[0].insert(Color::RED);
@@ -137,7 +137,7 @@ int main()
     acceptableColorsByPiles[1].insert(Color::YELLOW);
 
     std::vector<std::pair<int, int>>
-        minMaxPrices = {{20, 100},
+        minMaxPrices = {{20, 50},
                         {50, 70}};
     validate(s, acceptableColorsByPiles, minMaxPrices);
     printShelf(s);
